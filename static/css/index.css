@@ -78,17 +78,18 @@
   padding-left: .3rem;
 }
 .qzqk li .n1{
-  width: 3.6rem;
+  width: 4rem;
   float: left;
 }
 .qzqk li .n2{
-  width: 1.6rem;
+  width: 2.3rem;
   float: left;
 }.qzqk li .n3{
   width: 1.8rem;
   float: left;
+  display: none;
 }.qzqk li .n4{
-  width: 1.6rem;
+  width: 2.3rem;
   float: left;
 }.qzqk li p{
   color: #00EACB;
