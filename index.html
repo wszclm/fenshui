@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>分水镇工业驾驶舱</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="./static/js/libs/fontSize.js"></script>
+
+  <link rel="stylesheet" href="./static/layui/css/layui.css">
+  <link rel="stylesheet" href="./static/css/base.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="./static/css/fs.min.css" />
+  <script type="text/javascript" src="./static/js/libs/fs.min.js"></script>
+
+  <script src="./static/js/libs/jquery.min.js"></script>
+
+  <script src="./static/layui/layui.js"></script>
+  <script src="./static/js/libs/countUp.js"></script>
+  <script src="./static/js/libs/countUp-jquery.js"></script>
+  <script src="./static/js/libs/echarts.min.js"></script>
+
+  <style>
+    .maptalks-tooltip {
+      display: block;
+      background: rgba(0, 0, 0, .6);
+      border: .01rem solid #000;
+      padding: 0 .04rem;
+      height: auto;
+      line-height: .40rem;
+      font-size: .24rem;
+      white-space: nowrap;
+      padding: .2rem;
+      color: #fff;
+      border-radius: .02rem;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="all">
+    <div id="map" class="container"></div>
+
+    <div class="head_yd">
+      <!-- 大标题 -->
+      <div class="middleTitle">
+        <div class="middleTitlebg"></div>
+        <div class="lightLine1"></div>
+        <div class="lightLine2"></div>
+      </div>
+    </div>
+    <!-- 主体 -->
+    <div class="main">
+      <div class="main_left">
+        <div class="contern_box">
+          <div class="content_title">全镇情况 <span class="orange"></span></div>
+          <div class="content_msg" style="padding: .2rem .4rem">
+            <ul class="qzqk">
+              <li>
+                <div class="n1">工业企业数</div>
+                <div class="n2">
+                  <p>150</p>家
+                </div>
+                <div class="n3">
+                  <p class="red"><span class="icon iconfont icon-arrowTop-fill"></span>150</p>家
+                </div>
+                <div class="n4">
+                  <p class="red"><span class="icon iconfont icon-arrowTop-fill"></span>15%</p>
+                </div>
+              </li>
+              <li>
+                <div class="n1">企业主营收入</div>
+                <div class="n2">
+                  <p>150</p>家
+                </div>
+                <div class="n3">
+                  <p class="red"><span class="icon iconfont icon-arrowTop-fill"></span>150</p>家
+                </div>
+                <div class="n4">
+                  <p class="red"><span class="icon iconfont icon-arrowTop-fill"></span>15%</p>
+                </div>
+              </li>
+              <li>
+                <div class="n1">企业主规上工业增加值</div>
+                <div class="n2">
+                  <p>150</p>家
+                </div>
+                <div class="n3">
+                  <p class="red"><span class="icon iconfont icon-arrowTop-fill"></span>150</p>家
+                </div>
+                <div class="n4">
+                  <p class="red"><span class="icon iconfont icon-arrowTop-fill"></span>15%</p>
+                </div>
+              </li>
+              <li>
+                <div class="n1">企业利润</div>
+                <div class="n2">
+                  <p>150</p>家
+                </div>
+                <div class="n3">
+                  <p class="red"><span class="icon iconfont icon-arrowTop-fill"></span>150</p>家
+                </div>
+                <div class="n4">
+                  <p class="red"><span class="icon iconfont icon-arrowTop-fill"></span>15%</p>
+                </div>
+              </li>
+              <li>
+                <div class="n1">企业税收实际贡献</div>
+                <div class="n2">
+                  <p>150</p>家
+                </div>
+                <div class="n3">
+                  <p class="red"><span class="icon iconfont icon-arrowTop-fill"></span>150</p>家
+                </div>
+                <div class="n4">
+                  <p class="red"><span class="icon iconfont icon-arrowTop-fill"></span>15%</p>
+                </div>
+              </li>
+              <li>
+                <div class="n1">规上工业研发投入</div>
+                <div class="n2">
+                  <p>150</p>家
+                </div>
+                <div class="n3">
+                  <p class="red"><span class="icon iconfont icon-arrowTop-fill"></span>150</p>家
+                </div>
+                <div class="n4">
+                  <p class="red"><span class="icon iconfont icon-arrowTop-fill"></span>15%</p>
+                </div>
+              </li>
+              <li>
+                <div class="n1">出口交货值</div>
+                <div class="n2">
+                  <p>150</p>家
+                </div>
+                <div class="n3">
+                  <p class="red"><span class="icon iconfont icon-arrowTop-fill"></span>150</p>家
+                </div>
+                <div class="n4">
+                  <p class="red"><span class="icon iconfont icon-arrowTop-fill"></span>15%</p>
+                </div>
+              </li>
+              <li>
+                <div class="n1">规上企业用电</div>
+                <div class="n2">
+                  <p>150</p>家
+                </div>
+                <div class="n3">
+                  <p class="red"><span class="icon iconfont icon-arrowTop-fill"></span>150</p>家
+                </div>
+                <div class="n4">
+                  <p class="red"><span class="icon iconfont icon-arrowTop-fill"></span>15%</p>
+                </div>
+              </li>
+              <li>
+                <div class="n1">规上企业用工</div>
+                <div class="n2">
+                  <p>150</p>家
+                </div>
+                <div class="n3">
+                  <p class="red"><span class="icon iconfont icon-arrowTop-fill"></span>150</p>家
+                </div>
+                <div class="n4">
+                  <p class="red"><span class="icon iconfont icon-arrowTop-fill"></span>15%</p>
+                </div>
+              </li>
+              <li>
+                <div class="n1">企业用地</div>
+                <div class="n2">
+                  <p>150</p>家
+                </div>
+                <div class="n3">
+                  <p class="red"><span class="icon iconfont icon-arrowTop-fill"></span>150</p>家
+                </div>
+                <div class="n4">
+                  <p class="red"><span class="icon iconfont icon-arrowTop-fill"></span>15%</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="contern_box ct2">
+          <div class="content_title">产业分类</div>
+          <div class="content_msg">
+            <ul class="cyfl">
+              <li>
+                <div class="cyfl_t">
+                  <div class="cyfl_title">制笔产业</div>
+                </div>
+                <div class="cyfl_nums">
+                  <div class="cn_num">
+                    <div class="n1">企业用地</div>
+                    <div class="n2"><span>150</span>家</div>
+                  </div>
+                  <div class="cn_num">
+                    <div class="n1">主营收入</div>
+                    <div class="n2"><span>12</span>亿</div>
+                  </div>
+                  <div class="cn_num">
+                    <div class="n1">规上企业</div>
+                    <div class="n2"><span>150</span>家</div>
+                  </div>
+                  <div class="cn_num">
+                    <div class="n1">亩均税收</div>
+                    <div class="n2"><span>150</span>万/亩</div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="cyfl_t">
+                  <div class="cyfl_title">蜜粉产业</div>
+                </div>
+                <div class="cyfl_nums">
+                  <div class="cn_num">
+                    <div class="n1">企业用地</div>
+                    <div class="n2"><span>150</span>家</div>
+                  </div>
+                  <div class="cn_num">
+                    <div class="n1">主营收入</div>
+                    <div class="n2"><span>12</span>亿</div>
+                  </div>
+                  <div class="cn_num">
+                    <div class="n1">规上企业</div>
+                    <div class="n2"><span>150</span>家</div>
+                  </div>
+                  <div class="cn_num">
+                    <div class="n1">亩均税收</div>
+                    <div class="n2"><span>150</span>万/亩</div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="cyfl_t">
+                  <div class="cyfl_title">五金机械</div>
+                </div>
+                <div class="cyfl_nums">
+                  <div class="cn_num">
+                    <div class="n1">企业用地</div>
+                    <div class="n2"><span>150</span>家</div>
+                  </div>
+                  <div class="cn_num">
+                    <div class="n1">主营收入</div>
+                    <div class="n2"><span>12</span>亿</div>
+                  </div>
+                  <div class="cn_num">
+                    <div class="n1">规上企业</div>
+                    <div class="n2"><span>150</span>家</div>
+                  </div>
+                  <div class="cn_num">
+                    <div class="n1">亩均税收</div>
+                    <div class="n2"><span>150</span>万/亩</div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="main_center">
+        <!-- 企业详情 -->
+        <div class="qiye_box">
+          <div class="qiye_close"></div>
+          <div class="qiye_name">蜜粉小镇</div>
+          <div class="qiye_auto">
+            <div class="qiye_msgs">
+              <p>桐庐伟强制笔有限公司</p>
+              <p>法人：张强</p>
+              <p>电话：1872673781</p>
+              <p>地址：分水镇幸福南路218</p>
+              <p>经营范围：笔芯加工与制造、机械加工、设备制造贸易...</p>
+            </div>
+            <div class="qiye_num">
+              <p>营收入：237万元</p>
+              <p>用地面积：5亩</p>
+              <p>亩均税收：234万元/亩</p>
+              <p>R&D23%</p>
+            </div>
+          </div>
+        </div>
+        <div class="cb_input">
+          <input type="text" id="qiyeName" placeholder="请输入企业名称">
+          <button onclick="checkInfo()"><img src="./static/images/ss.png" style="width: .5rem;" alt=""></button>
+        </div>
+        <ul class="center_btns">
+          <li class="active">二维地图</li>
+          <li>三维地图</li>
+        </ul>
+      </div>
+      <div class="main_right">
+        <div class="contern_box ct3">
+          <div class="content_title">亲清在线 </div>
+          <div class="contetn_msg">
+            <ul class="qqzx_ul">
+              <li>
+                <div class="qqzx_box">
+                  <p class="n1">政策兑现企业数</p>
+                  <p class="n2"><span>150</span>家</p>
+                </div>
+                <div class="qqzx_box">
+                  <p class="n1">政策兑现总金额</p>
+                  <p class="n2"><span>1234</span>万元</p>
+                </div>
+              </li>
+              <li>
+                <div class="qqzx_box">
+                  <p class="n1">已上线政策数量 </p>
+                  <p class="n2"><span>150</span>条</p>
+                </div>
+                <div class="qqzx_box">
+                  <p class="n1">累计兑付员工数</p>
+                  <p class="n2"><span>1234</span>个</p>
+                </div>
+              </li>
+              <li>
+                <div class="qqzx_box">
+                  <p class="n1">累计服务企业数</p>
+                  <p class="n2"><span>150</span>家</p>
+                </div>
+                <div class="qqzx_box">
+                  <p class="n1">办结率</p>
+                  <p class="n2"><span>99%</span></p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="contern_box ct4" style="padding-top: .36rem;">
+          <div class="content_title">安全生产</div>
+          <div class="content_msg">
+            <div id="charts1" style="width: 100%;height: 100%;"></div>
+          </div>
+        </div>
+        <div class="contern_box ct5">
+          <div class="content_title">工业项目投资情况</div>
+          <div class="content_msg" style="padding-top: .2rem;">
+            <ul class="gyxm_ul">
+              <li>
+                <div class="n1">在库项目数</div>
+                <div class="n2">36个</div>
+              </li>
+              <li>
+                <div class="n1">完成投资 </div>
+                <div class="n2">262616 万元</div>
+              </li>
+              <li>
+                <div class="n1">投资同比增幅</div>
+                <div class="n2">51%</div>
+              </li>
+              <li>
+                <div class="n1">制造业项目落地数</div>
+                <div class="n2">5个</div>
+              </li>
+              <li>
+                <div class="n1">“152”省县长项目总数</div>
+                <div class="n2">36个</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+
+  <!--基础js-->
+  <script src="./static/js/config.js"></script>
+  <script src="./static/js/index.js"></script>
+  <script>
+    const map = new YY.Map('map', {
+      center: [119.38217381727907, 29.97054487189743],
+      zoom: 12,
+      attribution: '',
+      centerCross: false,
+      fog: false,
+      compass: false,
+      bearing: -10.2,
+      pitch: 51.2
+
+    });
+    map.on('click', function (e) {
+      console.log(e)
+    })
+
+    const amapTileLayer = YY.LayerLookup.lookup('amap');
+    // map.addBaseLayer(amapTileLayer);
+
+
+    const areaLayer = new YY.VectorLayer(YY.H.uuid());
+    map.addLayer(areaLayer)
+    const offsetHeight = 500,
+      polygonlen = 3;
+    var baseVectorLayer = new YY.VectorLayer(YY.H.uuid(), {
+      enableAltitude: true,
+      altitude: offsetHeight * polygonlen,
+    });
+    map.addLayer(baseVectorLayer)
+
+    setTimeout(() => {
+      init();
+    }, 100)
+
+    var polygons = [];
+    let polygonStyle = YY.Style.formatFill({
+      polygonFill: "#013577",
+      polygonOpacity: 0.5,
+      lineColor: "#68C7FB",
+      lineWidth: 2,
+    });
+    let polygonStyleNew = YY.Style.formatFill({
+      polygonFill: "#3CFEFD",
+      polygonOpacity: 0.5,
+      lineColor: "#68C7FB",
+      lineWidth: 2,
+    });
+    function init() {
+      areaLayer.removeOverlay(polygons);
+      polygons = [];
+      fetch("./static/data/fenshui.json")
+        .then((res) => res.json())
+        .then((json) => {
+          const polygon = new YY.Polygon(YY.GeometryHelper.strToLngLatArray(json.RECORDS[0].lnglats), polygonStyle);
+          const style = YY.Style.formatFill({
+            lineWidth: 4,
+            lineColor: "#219aff",
+            polygonFill: "#191c1e",
+            polygonOpacity: 0.0,
+            shadowColor: "#30a3ff",
+            shadowBlur: 8,
+          });
+          baseVectorLayer.addOverlay(polygon);
+
+          // polygon.on('click',function (e) {
+          //     e.target.updateStyle(polygonStyleNew)
+          // })
+          for (let i = 0, len = polygonlen; i <= len; i++) {
+            const p = polygon.clone();
+            p.setProperties({ altitude: offsetHeight * i });
+            const style1 = style.clone();
+            style1.lineColor = YY.H.toRGB(style.lineColor, (i + 1) / len);
+            // style1.lineWidth = 4 * i + 2;
+            p.setStyle(style1);
+            polygons.push(p);
+          }
+          areaLayer.addOverlays(polygons);
+        });
+
+    }
+
+
+
+
+
+  </script>
+</body>
+
+</html>
