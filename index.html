@@ -41,7 +41,6 @@
 
 <body>
   <div class="all">
-    <div id="map" class="container"></div>
 
     <div class="head_yd">
       <!-- 大标题 -->
@@ -258,36 +257,6 @@
           </div>
         </div>
       </div>
-      <div class="main_center">
-        <!-- 企业详情 -->
-        <div class="qiye_box">
-          <div class="qiye_close"></div>
-          <div class="qiye_name">蜜粉小镇</div>
-          <div class="qiye_auto">
-            <div class="qiye_msgs">
-              <p>桐庐伟强制笔有限公司</p>
-              <p>法人：张强</p>
-              <p>电话：1872673781</p>
-              <p>地址：分水镇幸福南路218</p>
-              <p>经营范围：笔芯加工与制造、机械加工、设备制造贸易...</p>
-            </div>
-            <div class="qiye_num">
-              <p>营收入：237万元</p>
-              <p>用地面积：5亩</p>
-              <p>亩均税收：234万元/亩</p>
-              <p>R&D23%</p>
-            </div>
-          </div>
-        </div>
-        <div class="cb_input">
-          <input type="text" id="qiyeName" placeholder="请输入企业名称">
-          <button onclick="checkInfo()"><img src="./static/images/ss.png" style="width: .5rem;" alt=""></button>
-        </div>
-        <ul class="center_btns">
-          <li class="active">二维地图</li>
-          <li>三维地图</li>
-        </ul>
-      </div>
       <div class="main_right">
         <div class="contern_box ct3">
           <div class="content_title">亲清在线 </div>
@@ -360,6 +329,39 @@
           </div>
         </div>
       </div>
+      <div class="main_center">
+        <div id="map" class="container"></div>
+
+        <!-- 企业详情 -->
+        <div class="qiye_box">
+          <div class="qiye_close"></div>
+          <div class="qiye_name">蜜粉小镇</div>
+          <div class="qiye_auto">
+            <div class="qiye_msgs">
+              <p>桐庐伟强制笔有限公司</p>
+              <p>法人：张强</p>
+              <p>电话：1872673781</p>
+              <p>地址：分水镇幸福南路218</p>
+              <p>经营范围：笔芯加工与制造、机械加工、设备制造贸易...</p>
+            </div>
+            <div class="qiye_num">
+              <p>营收入：237万元</p>
+              <p>用地面积：5亩</p>
+              <p>亩均税收：234万元/亩</p>
+              <p>R&D23%</p>
+            </div>
+          </div>
+        </div>
+        <div class="cb_input">
+          <input type="text" id="qiyeName" placeholder="请输入企业名称">
+          <button onclick="checkInfo()"><img src="./static/images/ss.png" style="width: .5rem;" alt=""></button>
+        </div>
+        <ul class="center_btns">
+          <li class="active">二维地图</li>
+          <li>三维地图</li>
+        </ul>
+      </div>
+      
 
 
 
@@ -369,7 +371,7 @@
   <!--基础js-->
   <script src="./static/js/config.js"></script>
   <script src="./static/js/index.js"></script>
-  <script>
+  <!-- <script>
     const map = new YY.Map('map', {
       center: [119.38217381727907, 29.97054487189743],
       zoom: 12,
@@ -453,6 +455,87 @@
 
 
 
+
+  </script> -->
+
+  <script>
+    const map = new YY.Map('map', {
+      center: [119.42860814798973, 29.920808985316597],
+      zoom: 16,
+      attribution: '',
+      centerCross: false,
+      fog: false,
+      compass: false,
+      bearing: -3.59,
+      pitch: 12.8
+
+    });
+    map.on('click', function (e) {
+      console.log(e)
+    })
+
+    const amapTileLayer = YY.LayerLookup.lookup('amap');
+
+    const amapTileLayer1 = YY.LayerLookup.lookup('amap', {
+      style: 'image'
+    });
+    map.addBaseLayer(amapTileLayer1);
+    map.addBaseLayer(amapTileLayer);
+
+    const areaLayer = new YY.VectorLayer(YY.H.uuid());
+    map.addLayer(areaLayer)
+    const vectorLayer = new YY.VectorLayer(YY.H.uuid());
+    map.addLayer(vectorLayer)
+    const offsetHeight = 500,
+      polygonlen = 3;
+    var baseVectorLayer = new YY.VectorLayer(YY.H.uuid(), {
+      enableAltitude: true,
+      altitude: offsetHeight * polygonlen,
+    });
+    map.addLayer(baseVectorLayer)
+    setTimeout(() => {
+      init();
+    }, 100)
+  </script>
+  <script>
+
+
+    function init() {
+      fetch("./static/data/fenshui.json")
+        .then((res) => res.json())
+        .then((json) => {
+          const polygon = new YY.Polygon(YY.GeometryHelper.strToLngLatArray(json.RECORDS[0].lnglats), YY.Style.formatFill({
+            polygonFill: "#14ffeb",
+            polygonOpacity: 0,
+            lineColor: "#013577",
+            lineWidth: 3,
+          }));
+          areaLayer.addOverlay(polygon);
+          addPolygons()
+        })
+    }
+
+    var polygons = [];
+
+    function addPolygons() {
+      vectorLayer.removeOverlays(polygons);
+      polygons = [];
+      fetch('./static/data/1639.json').then(res => res.json()).then(geojson => {
+        geojson.RECORDS.forEach(e => {
+          if (e.lnglats.includes(',')) {
+            const p = new YY.MultiPolygon(YY.GeometryHelper.strToLngLatArray(e.lnglats), YY.Style.formatFill({
+              polygonFill: "#14ffeb",
+              polygonOpacity: 0,
+              lineColor: "#ff2700",
+              lineWidth: 2,
+            }));
+            p.bindTooltip(`${e.name}`)
+            polygons.push(p)
+          }
+        })
+        vectorLayer.addOverlays(polygons);
+      })
+    }
 
   </script>
 </body>
